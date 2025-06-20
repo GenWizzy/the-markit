@@ -58,6 +58,7 @@ node_modules/
 
 # dotenv environment variables file (contains sensitive data)
 .env
+serviceAccountKey.json
 
 # dataconnect generated files
 .dataconnect
@@ -211,3 +212,4 @@ cython_debug/
 # Cursor settings
 .cursorignore
 .cursorindexingignore
+single_line_key.txt
