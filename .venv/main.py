@@ -51,6 +51,27 @@ ngrok_url = os.getenv('NGROK_URL')
 
 SERVER_URL = os.getenv('SERVER_URL') or os.getenv('NGROK_URL')
 
+# Retrieve the raw JSON string for the Firebase service account
+raw_service_account = os.getenv("FIREBASE_SERVICE_ACCOUNT")
+print("Raw service account:", repr(raw_service_account))
+
+if not raw_service_account:
+    raise ValueError("FIREBASE_SERVICE_ACCOUNT is not set.")
+
+# Convert literal "\n" sequences to actual newlines
+fixed_service_account = raw_service_account.encode('utf-8').decode('unicode_escape')
+
+
+# Parse the JSON to get the service account info
+service_account_info = json.loads(fixed_service_account)
+
+# Initialize Firebase credentials
+cred = credentials.Certificate(service_account_info)
+firebase_admin.initialize_app(cred)
+
+# Initialize Firestore using the project ID from the .env
+db = firestore.Client(project=os.getenv("GOOGLE_CLOUD_PROJECT"))
+
 
 # Global variables:
 previous_message_id = None
@@ -67,10 +88,7 @@ TELEGRAM_API_URL = f"https://api.telegram.org/bot{bot_token}"
 CHANNEL_ID = -1002442941388  # Replace with your actual channel ID
 TIMEOUT = 10  # Increase timeout value to 10 seconds
 
-# Initialize Firebase
-cred = credentials.Certificate("C:/Users/HP1/PycharmProjects/theMarkit/serviceAccountKey.json")
-firebase_admin.initialize_app(cred)
-db = firestore.Client(project="the-markit-446be")
+
 
 
 current_read_count = 0
