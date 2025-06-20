@@ -1,5 +1,5 @@
 import firebase_admin
-from firebase_admin import credentials, firestore
+from firebase_admin import credentials, firestore as fb_firestore
 from flask import Flask, request
 from flask import Flask, request, jsonify
 from google.cloud import firestore
