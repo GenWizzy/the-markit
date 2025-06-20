@@ -70,8 +70,8 @@ service_account_info = json.loads(fixed_service_account)
 cred = credentials.Certificate(service_account_info)
 firebase_admin.initialize_app(cred)
 
-# Initialize Firestore using the project ID from the .env
-db = firestore.Client(project=os.getenv("GOOGLE_CLOUD_PROJECT"))
+db = firestore.client()
+
 
 
 
