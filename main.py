@@ -70,7 +70,7 @@ service_account_info = json.loads(fixed_service_account)
 cred = credentials.Certificate(service_account_info)
 firebase_admin.initialize_app(cred)
 
-db = firestore.client()
+db = fb_firestore.client()
 
 
 
