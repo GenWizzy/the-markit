@@ -50,7 +50,12 @@ ADMIN_CHAT_ID = os.getenv('ADMIN_CHAT_ID')
 ngrok_url = os.getenv('NGROK_URL')
 
 SERVER_URL = os.getenv('SERVER_URL') or os.getenv('NGROK_URL')
+# Construct the webhook URL
+webhook_url = f"{SERVER_URL}/{bot_token}"
+print("Webhook URL:", webhook_url)
 
+bot = Bot(token=bot_token)
+bot.setWebhook(webhook_url)
 
 # Retrieve the raw JSON string for the Firebase service account
 raw_service_account = os.getenv("FIREBASE_SERVICE_ACCOUNT")
